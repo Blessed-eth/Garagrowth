@@ -1,10 +1,9 @@
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
+/* Base styles for Mobile devices */
   
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 100vw;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #333333;
   display: flex;
@@ -13,8 +12,12 @@ html, body {
   transition: background 1s cubic-bezier(0.77, 0, 0.175, 1);
   scroll-behavior: smooth;
   font-family: 'Inter', sans-serif;
+  position: relative;
 }
 
+  /*-- -------------------------- -->
+<---          Header            -->
+<--- -------------------------- -*/
 
 .navbar {
   display: flex;
@@ -75,7 +78,7 @@ body.active-hamburger {
 
 .menu {
   height: 100%;
-  width: 100%;
+  width: 100vw;
   background-color: #333333;
   opacity: 0;
   visibility: hidden;
@@ -216,6 +219,10 @@ path {
   pointer-events: all;
 }
 
+/*-- -------------------------- -->
+<---          Hero              -->
+<--- -------------------------- -*/
+
 #container {
     margin: 20vh auto;
     flex: 1;
@@ -224,9 +231,6 @@ path {
     width: 100%;
     height: 70vh;
     position: relative;
-  
-    z-index: 222;
-    
 }
 
 iframe#hero-animation {
@@ -240,9 +244,19 @@ iframe#hero-animation {
 h2 { 
   display : none;
 }
+/*-- -------------------------- -->
+<---          Content           -->
+<--- -------------------------- -*/
 
 section#faq_section{
   display: none;
+}
+
+.content-above {
+  height: 200vh; /* Adjust height as needed */
+  z-index: 999; /* Higher than the card to cover it */
+  position: relative; /* Needed to establish stacking context */
+  border: 2px solid white;
 }
 
 /*-- -------------------------- -->
@@ -262,7 +276,6 @@ section#faq_section{
 body {  
   
   flex-direction: column;
-
   align-items: center;
   height: 190vh;
   margin: 0;
@@ -293,20 +306,28 @@ section#footer-card {
     display: flex;
 }
 
-.card {
+.wrapper {
+  display: absolute;
+  flex-direction: wrap;
+  min-height: 50vh;
+  height: 80%;
+  position: relative;
+  width: 100%;
+  z-index: 999;
+}
+
+.content-card {
+  height: calc(8 * var(--m));
+  width: 50%;
   
-  width: calc(12 * var(--m));
-  background:rgba(99, 99, 99, 0.9);
-  border: 3px solid black;
+  background: linear-gradient(120deg, #ff8064, #725bdc);
   color: black;
   border-radius: calc(0.5 * var(--m));
   display: flex;
-  border: 5px solid white;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: var(--m);
-  z-index: 2;
   position: fixed;
   margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m))
     calc(5 * var(--m));
@@ -321,34 +342,23 @@ button {
   font-weight: 400;
   padding: calc(0.35 * var(--m)) calc(0.8 * var(--m));
   border-radius: calc(0.3 * var(--m));
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  height: 100%;
-  border: 5px solid green;
-  position: relative;
-}
-
-footer {
-  z-index: 500;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: flex-end;
-  padding: 5rem 2vw;
-  bottom: 0;       
-  position: relative;/* Align it to the bottom */ 
   
 }
 
-p#copyright {
-  position: relative;
-  margin-left: 0;
-  width: 100%;
+
+
+footer {
+  margin-top: 80vh;
+  z-index: 500;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  padding: 5rem 2vw;
+  
+  
 }
 
 footer::before {
@@ -370,6 +380,7 @@ footer::before {
   z-index: -5;
   position: absolute;
   inset: 0;
+
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
 
@@ -390,29 +401,61 @@ footer::before {
   );
 }
 
+
+
 .col {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   padding: calc(0.3 * var(--m)) calc(0.8 * var(--m));
-  width: 35%;
-  
-  
+  width: 28%;
 }
 
-.col1 {
-  height: 16vh;
+.col-1 {
+  width: 10%;
+  border: 1px solid white;
 }
+
 .col2,
 .col3 {
   background-color: #121212;
   border-radius: calc(0.5 * var(--m));
-  left: 5vw;
 }
 
 img {
   height: calc(0.3 * var(--m));
   object-fit: cover;
+}
+
+.social {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link {
+  width: calc(0.8 * var(--m));
+  height: calc(0.8 * var(--m));
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: calc(0.1 * var(--m));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+p#copyright {
+  position: relative;
+  margin-left: 0;
+  width: 100%;
 }
 
 #socialmedia{
@@ -538,13 +581,136 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+/* Big Smartphone */
+@media (min-width: 360px) and (max-width: 700px) {
+
+  .content-above {
+    height: 200vh; /* Adjust height as needed */
+    top: 0;
+    z-index: 99999;
+    position: relative; /* Needed to establish stacking context */
+    border: 3px solid black;
+    background-color: rgba( 9, 9, 9); 
+  }
+
+  /*-- -------------------------- -->
+<---          Footer            -->
+<--- -------------------------- -*/
+  
+  .col {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .col2 p {
+    margin: 10%;
+    text-align: center;
+  }
+
+  .hero_section {
+    position: relative;
+    background-color: grey;
+    z-index: 9999999;
+  }
+
+  .wrapper {
+    flex-direction: wrap;
+    min-height: 50vh;
+    height: 50%;
+    width: 100vw;
+    position: relative;
+    
+    
+  }
+
+  .cards-section {
+    position: relative;
+  }
+
+  
+
+.content-card {
+  height: calc(8 * var(--m));
+  background: linear-gradient(120deg, #ff8064, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  margin: 0 auto;
+  left: 10%;
+  bottom: 5%;
+  z-index: 3;
+  width: 80%;
+}
+  
+  button {
+    background-color: #000;
+    font-size: calc(0.4 * var(--m));
+    border: none;
+    color: #e5e5e5;
+    font-family: "IBM Plex Sans";
+    font-weight: 400;
+    padding: calc(0.35 * var(--m)) calc(0.8 * var(--m));
+    border-radius: calc(0.3 * var(--m));
+    
+  }
+  
+  footer {
+    margin-top: 80vh;
+    z-index: 99999;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    padding: 5rem 2vw;
+    position: relative;
+  }
+
+  section#footer-card {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    padding: 5rem 2vw;
+    border: 1px solid green;
+    z-index: 999;
+  }
+
+  div.button_cont {
+    border: 1px solid red;
+    float: bottom;
+    position: relative;
+  }
+
+  p#copyright {
+    position: absolute;
+    left: 15%;
+    width: 80%;
+    bottom: 0;
+    
+  }
 }
 
 /* Tablet */
-@media screen and (max-width: 1000px) {
+@media (min-width: 700px) and (max-width: 1000px) {
   :root {
     --m: 3rem;
   }
+
+  .content-above {
+    height: 100vh; /* Adjust height as needed */
+    z-index: 10; /* Higher than the card to cover it */
+    position: relative; /* Needed to establish stacking context */
+  }
+
 
   /*-- -------------------------- -->
 <---          Footer            -->
@@ -557,36 +723,6 @@ a {
     width: 100%;
     bottom: 0;
   }
-}
-
-/* Big Smartphone */
-@media screen and (max-width: 700px) {
-
-  /*-- -------------------------- -->
-<---          Footer            -->
-<--- -------------------------- -*/
-  footer {
-    flex-direction: column;
-    padding: 5rem 20vw;
-  }
-  .col {
-    width: 100%;
-  }
-}
-
-
-/* Desktop - 360px */
-@media screen and (min-width: 62rem) { 
-  /*-- -------------------------- -->
-<---          Footer            -->
-<--- -------------------------- -*/
-  footer {
-    flex-direction: column;
-    padding: 5rem 20vw;
-  }
-  .col {
-    width: 100%;
-  }
 
   .wrapper {
     display: flex;
@@ -594,7 +730,76 @@ a {
     min-height: 100vh;
     height: 100%;
     width: 100%;
-    border: 5px solid blue;
   }
+}
+
+
+/* Desktop - 992px */
+@media (min-width: 1000px) { 
+
+  .content-above {
+    border: 1px solid red;
+    height: 100vh; /* Adjust height as needed */
+    z-index: 10; /* Higher than the card to cover it */
+    position: relative; /* Needed to establish stacking context */
+  }
+
+  /*-- -------------------------- -->
+<---          Footer            -->
+<--- -------------------------- -*/
+
+
+.wrapper {
+  display: absolute;
+  flex-direction: wrap;
+  min-height: 50vh;
+  height: 50%;
+  border: 5px solid green;
+  position: relative;
+  z-index: 999;
+}
+
+.card {
+  height: calc(8 * var(--m));
+  
+  background: linear-gradient(120deg, #ff8064, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+
+  position: fixed;
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m))
+    calc(5 * var(--m));
+}
+
+button {
+  background-color: #000;
+  font-size: calc(0.4 * var(--m));
+  border: none;
+  color: #e5e5e5;
+  font-family: "IBM Plex Sans";
+  font-weight: 400;
+  padding: calc(0.35 * var(--m)) calc(0.8 * var(--m));
+  border-radius: calc(0.3 * var(--m));
+}
+
+footer {
+  margin-top: 80vh;
+  z-index: 500;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  padding: 5rem 2vw;
+  position: relative;
+}
+
 }
                               
